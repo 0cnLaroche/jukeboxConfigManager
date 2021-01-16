@@ -8,16 +8,24 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Returns 404 - NOT FOUND status code to client
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
-public class NotFoundException extends RuntimeException{
+public class NotFoundException extends RuntimeException implements ApiException {
 
     private final String message;
+    private final ErrorCode errorCode;
 
-    public NotFoundException(Class<?> clazz, String id) {
-        this.message = String.format("No resource %s found for id %s", clazz.getName(), id);
+    public NotFoundException(Class<?> clazz, String id, ErrorCode errorCode) {
+        this.errorCode = errorCode;
+        this.message = String.format(
+                "No resource %s found for id %s. ", clazz.getName(), id);
     }
 
     @Override
     public String getMessage() {
         return message;
+    }
+
+    @Override
+    public ErrorCode getErrorCode() {
+        return this.errorCode;
     }
 }

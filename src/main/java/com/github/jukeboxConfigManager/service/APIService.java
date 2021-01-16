@@ -9,6 +9,9 @@ import com.github.jukeboxConfigManager.model.Jukebox;
 
 import java.util.List;
 
+/**
+ * Fetch resources from Touchtunes API
+ */
 @Service
 public class APIService {
    final private String host;
@@ -17,9 +20,9 @@ public class APIService {
    final private String settingsUri;
 
    public APIService(
-           @Value("api.touchtunes.url") String host,
-           @Value("api.touchtunes.jukeboxes") String jukeboxesUri,
-           @Value("api.touchtunes.settings") String settingsUri) {
+           @Value("${api.touchtunes.url}") String host,
+           @Value("${api.touchtunes.jukeboxes}") String jukeboxesUri,
+           @Value("${api.touchtunes.settings}") String settingsUri) {
        this.host = host;
        this.jukeboxesUri = jukeboxesUri;
        this.settingsUri = settingsUri;

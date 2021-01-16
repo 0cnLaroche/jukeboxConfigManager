@@ -5,6 +5,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 
+/**
+ * Utility class for comparing lists.
+ * @param <E> list elements to be compared
+ */
 public class ListComparator<E extends Comparable> {
 
     /**
@@ -15,12 +19,14 @@ public class ListComparator<E extends Comparable> {
      * @return
      */
     public boolean isIncludedIn(List<E> included, List<E> in) {
+
+        // Lists must ordered other algo won't work
         Collections.sort(included);
         Collections.sort(in);
-
         ListIterator<E> listIn = in.listIterator();
         ListIterator<E> listIncluded = included.listIterator();
 
+        // O(n)
         while (listIn.hasNext() && listIncluded.hasNext()) {
             E objIn = listIn.next();
             E objIncluded = listIncluded.next();
